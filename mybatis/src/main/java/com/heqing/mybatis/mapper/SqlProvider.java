@@ -8,6 +8,10 @@ import java.text.MessageFormat;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * @author heqing
+ * @since 2021-07-21
+ */
 public class SqlProvider {
 
     public String saveBatchPeople(Map<String, Object> map) {

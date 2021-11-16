@@ -5,20 +5,44 @@ import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
+/**
+ * @author heqing
+ * @since 2021-07-21
+ */
 @CacheNamespace
 @Mapper
 public interface PeopleMapper {
 
+    /**
+     * 保存信息
+     * @param people
+     * @return
+     */
     @Insert("INSERT INTO people(name,age,gender,create_time) VALUES(#{name},#{age},#{gender},#{createTime})")
     @Options(useGeneratedKeys = true, keyColumn = "id", keyProperty = "id")
     int savePeople(People people);
 
+    /**
+     * 批量保存信息
+     * @param peopleList
+     * @return
+     */
     @InsertProvider(type=SqlProvider.class, method="saveBatchPeople")
     int saveBatchPeople(List<People> peopleList);
 
+    /**
+     * 修改信息
+     * @param people
+     * @return
+     */
     @Update("update people set name = #{name}, age = #{age}, gender= #{gender}, create_time = #{createTime} where id = #{id}")
     int updatePeopleByKey(People people);
 
+    /**
+     * 根据id获取信息
+     * @param id
+     * @return
+     */
     @Results(
         id="peopleResultMap",
         value={
@@ -32,10 +56,19 @@ public interface PeopleMapper {
     @Select("SELECT id, name, age, gender, create_time  FROM people WHERE id = #{id}")
     People getPeopleByKey(Long id);
 
+    /**
+     * 获取索引信息
+     * @return
+     */
     @Select("SELECT id, name, age, gender, create_time FROM people ORDER BY id DESC")
     @ResultMap("peopleResultMap")
     List<People> listPeople();
 
+    /**
+     * 根据参数获取信息
+     * @param people
+     * @return
+     */
     @Select("<script>" +
             "SELECT " +
                 "id, name, age, gender, create_time " +
@@ -52,16 +85,36 @@ public interface PeopleMapper {
     @ResultMap("peopleResultMap")
     List<People> listPeopleByParam(People people);
 
+    /**
+     * 根据id列表获取信息
+     * @param idList
+     * @return
+     */
     @SelectProvider(type=SqlProvider.class, method="listPeopleByKey")
     @ResultMap("peopleResultMap")
     List<People> listPeopleByKey(List<Long> idList);
 
+    /**
+     * 根据id删除信息
+     * @param id
+     * @return
+     */
     @Delete("DELETE FROM people WHERE id = #{id}")
     int deletePeopleByKey(Long id);
 
+    /**
+     * 根据id列表批量删除信息
+     * @param idList
+     * @return
+     */
     @DeleteProvider(type=SqlProvider.class, method="deleteBatchPeopleByKey")
     int deleteBatchPeopleByKey(List<Long> idList);
 
+    /**
+     * 根据参数批量删除信息
+     * @param people
+     * @return
+     */
     @Delete("<script>" +
             "DELETE FROM people " +
             "<where>" +

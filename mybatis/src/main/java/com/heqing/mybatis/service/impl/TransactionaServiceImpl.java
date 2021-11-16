@@ -9,6 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+/**
+ * @author heqing
+ * @since 2021-07-21
+ */
 @Service
 public class TransactionaServiceImpl implements TransactionaService {
 
@@ -25,7 +29,7 @@ public class TransactionaServiceImpl implements TransactionaService {
      *      java里面将派生于Error或者RuntimeException（比如空指针，1/0）的异常称为unchecked异常，其他继承自java.lang.Exception得异常统称为Checked Exception，如IOException、TimeoutException等
      */
     @Override
-    @Transactional
+    @Transactional(rollbackFor=Exception.class)
     public void save(boolean isbug) throws RuntimeException {
         Teacher teacher = new Teacher();
         teacher.setName("测试1");

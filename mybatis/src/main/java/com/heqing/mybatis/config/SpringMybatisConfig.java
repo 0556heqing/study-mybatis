@@ -17,34 +17,41 @@ import javax.sql.DataSource;
 import java.io.IOException;
 import java.util.Properties;
 
+/**
+ * @author heqing
+ * @since 2021-07-21
+ *
+ * @MapperScan : 扫描Mybatis的Mapper接口
+ * @EnableTransactionManagement : 开启事务管理
+ */
 @Configuration
 @ComponentScan("com.heqing.mybatis.*")
-@MapperScan("com.heqing.mybatis.dao, com.heqing.mybatis.mapper") //扫描Mybatis的Mapper接口
-@EnableTransactionManagement //开启事务管理
+@MapperScan("com.heqing.mybatis.dao, com.heqing.mybatis.mapper")
+@EnableTransactionManagement
 public class SpringMybatisConfig {
 
     /**
      * 配置数据源
      **/
     @Bean
-    public DataSource dataSource(DBProperty dBProperty) {
+    public DataSource dataSource(DBProperty dbProperty) {
         DruidDataSource dataSource = new DruidDataSource();
-        dataSource.setUsername(dBProperty.getUser());
-        dataSource.setPassword(dBProperty.getPassword());
-        dataSource.setUrl(dBProperty.getUrl());
-        dataSource.setDriverClassName(dBProperty.getDriverClass());
-        dataSource.setInitialSize(dBProperty.getInitialSize());
-        dataSource.setMinIdle(dBProperty.getMinIdle());
-        dataSource.setMaxActive(dBProperty.getMaxActive());
-        dataSource.setMaxWait(dBProperty.getMaxWait());
-        dataSource.setValidationQuery(dBProperty.getValidationQuery());
-        dataSource.setTestWhileIdle(dBProperty.getTestWhileIdle());
-        dataSource.setTestOnBorrow(dBProperty.getTestOnBorrow());
-        dataSource.setTestOnReturn(dBProperty.getTestOnReturn());
-        dataSource.setTimeBetweenEvictionRunsMillis(dBProperty.getTimeBetweenEvictionRunsMillis());
-        dataSource.setMinEvictableIdleTimeMillis(dBProperty.getMinEvictableIdleTimeMillis());
-        dataSource.setPoolPreparedStatements(dBProperty.getPoolPreparedStatements());
-        dataSource.setMaxPoolPreparedStatementPerConnectionSize(dBProperty.getMaxPoolPreparedStatementPerConnectionSize());
+        dataSource.setUsername(dbProperty.getUser());
+        dataSource.setPassword(dbProperty.getPassword());
+        dataSource.setUrl(dbProperty.getUrl());
+        dataSource.setDriverClassName(dbProperty.getDriverClass());
+        dataSource.setInitialSize(dbProperty.getInitialSize());
+        dataSource.setMinIdle(dbProperty.getMinIdle());
+        dataSource.setMaxActive(dbProperty.getMaxActive());
+        dataSource.setMaxWait(dbProperty.getMaxWait());
+        dataSource.setValidationQuery(dbProperty.getValidationQuery());
+        dataSource.setTestWhileIdle(dbProperty.getTestWhileIdle());
+        dataSource.setTestOnBorrow(dbProperty.getTestOnBorrow());
+        dataSource.setTestOnReturn(dbProperty.getTestOnReturn());
+        dataSource.setTimeBetweenEvictionRunsMillis(dbProperty.getTimeBetweenEvictionRunsMillis());
+        dataSource.setMinEvictableIdleTimeMillis(dbProperty.getMinEvictableIdleTimeMillis());
+        dataSource.setPoolPreparedStatements(dbProperty.getPoolPreparedStatements());
+        dataSource.setMaxPoolPreparedStatementPerConnectionSize(dbProperty.getMaxPoolPreparedStatementPerConnectionSize());
         return dataSource;
     }
 

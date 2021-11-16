@@ -5,6 +5,8 @@ import java.util.List;
 
 /**
  * 分页帮助类
+ * @author heqing
+ * @since 2021-07-21
  */
 public class PageInfoUtil<T> implements Serializable {
 

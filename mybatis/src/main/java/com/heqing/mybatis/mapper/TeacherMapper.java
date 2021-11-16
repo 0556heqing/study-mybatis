@@ -4,9 +4,18 @@ import com.heqing.mybatis.model.SchoolClass;
 import com.heqing.mybatis.model.Teacher;
 import org.apache.ibatis.annotations.*;
 
+/**
+ * @author heqing
+ * @since 2021-07-21
+ */
 @Mapper
 public interface TeacherMapper {
 
+    /**
+     * 根据id获取教师信息
+     * @param teacherId
+     * @return
+     */
     @Results(
         id="teacherResult",
         value={

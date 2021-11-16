@@ -6,6 +6,10 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+/**
+ * @author heqing
+ * @since 2021-07-21
+ */
 @Repository
 public interface PeopleDao {
 

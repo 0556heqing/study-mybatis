@@ -5,6 +5,10 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 
+/**
+ * @author heqing
+ * @since 2021-07-21
+ */
 @Configuration
 @PropertySource("classpath:db.properties")
 @Data

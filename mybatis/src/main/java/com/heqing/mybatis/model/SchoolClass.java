@@ -5,6 +5,10 @@ import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 
+/**
+ * @author heqing
+ * @since 2021-07-21
+ */
 @NoArgsConstructor
 @Data
 public class SchoolClass implements Serializable {

@@ -18,5 +18,10 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface PersonMapper extends BaseMapper<PersonPO> {
 
+    /**
+     * 根据id获取信息
+     * @param id
+     * @return
+     */
     PersonPO selectPersonById(@Param("id") Long id);
 }

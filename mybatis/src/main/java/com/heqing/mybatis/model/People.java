@@ -7,6 +7,10 @@ import lombok.NoArgsConstructor;
 import java.io.Serializable;
 import java.util.Date;
 
+/**
+ * @author heqing
+ * @since 2021-07-21
+ */
 @NoArgsConstructor
 @Data
 public class People implements Serializable {

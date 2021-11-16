@@ -13,5 +13,10 @@ import com.heqing.mybatisplus.multinodular.demo.model.po.PersonPO;
  */
 public interface IPersonService extends IService<PersonPO> {
 
+    /**
+     * 根据id获取信息
+     * @param id
+     * @return
+     */
     PersonPO selectPersonById(Long id);
 }

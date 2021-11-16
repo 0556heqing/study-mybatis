@@ -7,6 +7,8 @@ import java.util.List;
 
 /**
  * 业务逻辑层接口
+ * @author heqing
+ * @since 2021-07-21
  */
 public interface PeopleService {
 
