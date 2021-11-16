@@ -1,0 +1,116 @@
+package ${package.Controller};
+
+import org.springframework.web.bind.annotation.RequestMapping;
+#if(${restControllerStyle})
+import org.springframework.web.bind.annotation.RestController;
+#else
+import org.springframework.stereotype.Controller;
+#end
+		#if(${superControllerClassPackage})
+import ${superControllerClassPackage};
+		#end
+import ${package.Service}.${table.serviceName};
+import ${package.Entity}.${entity};
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+/**
+ * <p>
+ * $!{table.comment} 前端控制器
+ * </p>
+ *
+ * @author ${author}
+ * @since ${date}
+ */
+#if(${restControllerStyle})
+@RestController
+#else
+@Controller
+#end
+@RequestMapping("#if(${package.ModuleName})/${package.ModuleName}#end/#if(${controllerMappingHyphenStyle})${controllerMappingHyphen}#else${table.entityPath}#end")
+#if(${kotlin})
+class ${table.controllerName}#if(${superControllerClass}) : ${superControllerClass}()#end
+
+		#else
+		#if(${superControllerClass})
+public class ${table.controllerName} extends ${superControllerClass} {
+		#else
+public class ${table.controllerName} {
+		#end
+
+	@Autowired
+    private ${table.serviceName} targetService;
+
+    /**
+     * 获取全部数据
+     */
+    @RequestMapping("/all")
+    @ResponseBody
+    public ResponseInfo<?> findAll(){
+        List<${entity}> models = targetService.list();
+        return ResponseInfo.buildSuccess(models);
+    }
+
+    /**
+     * 根据ID查找数据
+     */
+    @RequestMapping("/find")
+    @ResponseBody
+    public ResponseInfo<?> find(@RequestParam("id") Long id){
+        ${entity} po = targetService.getById(id);
+        if(po==null){
+            return ResponseInfo.buildError("尚未查询到此ID");
+        }
+        return ResponseInfo.buildSuccess(po);
+    }
+
+    /**
+     * 添加数据
+     */
+    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    @ResponseBody
+    public ResponseInfo<?> addItem(@RequestBody ${entity} requestVo){
+        if(targetService.save(requestVo)){
+            return ResponseInfo.buildSuccess();
+        }
+        return ResponseInfo.buildError("数据添加失败");
+    }
+
+    /**
+     * 批量添加数据
+     */
+    @RequestMapping(value = "/batchAdd", method = RequestMethod.POST)
+    @ResponseBody
+    public ResponseInfo<?> addItem(@RequestBody List<${entity}> requestVo){
+        if(targetService.saveBatch(requestVo)){
+            return ResponseInfo.buildSuccess();
+        }
+        return ResponseInfo.buildError("数据添加失败");
+    }
+
+    /**
+     * 更新数据
+     */
+    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    @ResponseBody
+    public ResponseInfo<?> updateItem(@RequestBody ${entity} requestVo){
+        if(targetService.updateById(requestVo)){
+				return ResponseInfo.buildSuccess();
+        }
+        return ResponseInfo.buildError("数据更改失败");
+    }
+
+    /**
+     * 删除数据
+     */
+    @RequestMapping("/del")
+    @ResponseBody
+    public ResponseInfo<?> deleteItems(@RequestParam("ids") List<Long> ids){
+        if(targetService.removeByIds(ids)){
+            return ResponseInfo.buildSuccess();
+        }
+        return ResponseInfo.buildError("数据删除失败");
+    }
+}
+
+#end

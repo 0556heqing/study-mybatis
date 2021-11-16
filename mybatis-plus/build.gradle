@@ -1,0 +1,35 @@
+plugins {
+    id 'org.springframework.boot' version '2.3.3.RELEASE'
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id 'java'
+}
+
+dependencies {
+
+    // 数据库
+    compile 'com.baomidou:mybatis-plus-boot-starter:3.4.0'
+    // 阿里jdbc连接池。。 如果使用mybatis-plus多数据源，需要去掉此包。原因：dynamic-datasource-spring-boot-starter已配置druid，与该配置有冲突
+//    compile 'com.alibaba:druid-spring-boot-starter:1.1.10'
+    compile 'mysql:mysql-connector-java:8.0.22'
+
+    // 多数据源
+    compile 'com.baomidou:dynamic-datasource-spring-boot-starter:3.4.0'
+
+    // 生成代码
+    compile 'com.baomidou:mybatis-plus-generator:3.4.0'
+    compile 'org.apache.velocity:velocity-engine-core:2.3'
+
+    // 构造器工具 lombok
+    compile 'org.projectlombok:lombok'
+    annotationProcessor group: 'org.projectlombok', name: 'lombok', version: lombok_version
+
+    // 阿里Json工具 fastjson
+    compile group: 'com.alibaba', name: 'fastjson', version: fastjson_version
+
+    compile 'org.springframework.boot:spring-boot-starter-web'
+    testCompile 'org.springframework.boot:spring-boot-starter-test'
+}
+
+test {
+    useJUnitPlatform()
+}
